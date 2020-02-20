@@ -13,14 +13,21 @@ def index():
     return render_template("index.htm")
 
 @app.route('/posting',methods=["POST"])
-def hello():
+def post_data():
     user=request.form['user']
     profile=request.form['profile']
     startdate=request.form['startdate']
     enddate=request.form['enddate']
     user_date=[user,profile,startdate,enddate]
-    sc.insert(user_date)
-    return redirect('/display')
+    error=sc.insert(user_date)
+    if(error):
+        return redirect('/error')
+    else:
+        return redirect('/display')
+    
+@app.route('/error')
+def error():
+    return "Start date should be less than end date"
 
 @app.route('/reset')
 def reset():

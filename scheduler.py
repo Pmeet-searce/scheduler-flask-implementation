@@ -83,7 +83,7 @@ def update(data,uName,p2,s2,e2):
                 dlist.remove(i)
     data[uName].append({"profile":p2,"startDate":s2,"endDate":e2})
 
-dates_error="End date greater than start date"
+dates_error=True
 # For inserting a profile in existing user
 def insert(data):
         
@@ -107,14 +107,12 @@ def insert(data):
         f_write=open("users.json","w")
         json.dump(users,f_write)
         f_write.close()    
-        return 0    
     
     #writing data to file
     f_write=open("users.json","w")    
     json.dump(users,f_write)
     f_write.close()
     f_read.close()
-    return 1
 
 # def check():
 #     f_read=open("users.json","r")

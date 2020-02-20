@@ -7,9 +7,11 @@
     </head>
     <body>
         
-        <div class="Input-part container d-flex justify-content-center" style="margin-top: 150px">
-            
-            <form name="userdata" action="http://127.0.0.1:5000/posting" style="width: 25%;" method="POST" onSubmit="return validate_data(userdata)">
+        <div class=" container text-white jumbotron bg-primary">
+            <h1>Enter data</h1>
+        </div>
+        <div class="Input-part container d-flex justify-content-center" style="margin-top: 1%">
+            <form name="userdata" action="{{url_for('post_data')}}" style="width: 25%;" method="POST" onSubmit="return validate_data(userdata)">
                 <div class="form-group">
 
                     <label for="user">Enter User name</label>
@@ -37,7 +39,7 @@
             </form>
         </div>
         <div class="container d-flex justify-content-center">
-            <a href="http://localhost:5000/display">
+            <a href="{{ url_for('display')}}">
                 <button class="form-control btn btn-primary">
                     Click here to check user data
                 </button>

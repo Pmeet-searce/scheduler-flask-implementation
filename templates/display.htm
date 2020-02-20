@@ -6,55 +6,43 @@
 </head>
 <body>
     <div class="container">
-        <h1 align="center" style="margin-top: 3%">
-            JSON DATA
-        </h1>
+        <div class=" container jumbotron text-white bg-primary">
+                <h1>
+                    JSON DATA
+                </h1>
+            </div>
         <div class="container d-flex justify-content-center" style="margin-top: 2%">
-            <!-- <div class="container" style="margin-top:100px; border:2px solid  grey; border-radius:50px;"> -->
-                <table cellpadding="10px">
-                    <tr>
-                        <th>
-                            User
-                        </th>
-                        <th>
-                            Profile
-                        </th>
-                        <th>
-                            Start date
-                        </th>
-                        <th>
-                            End date
-                        </th>
-                    </tr>
-                    {% for key in data.keys() %}
-                    <tr>
+                {% for key in data.keys() %}
+                <div class="card text-black mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Username : {{key}}</div>
+                    <div class="card-body">
                         {% for i in data[key] %}
-                        <td>
-                            {{key}} 
-                        </td>   
-                        
-                                <td>
-                                   {{i["profile"]}}     
-                                </td>
-                                <td>
-                                   {{i["startDate"]}}     
-                                </td>
-                                <td>
-                                   {{i["endDate"]}}     
-                                </td>
-                    </tr>
-                        {% endfor %}
+                          <h5 class="card-title">Profile : {{i['profile']}}</h5>
+                          <p class="card-text">
+                            Start date : {{i['startDate']}}
+                            <br>          
+                            End date : {{i['endDate']}}
+                            <br>
+                          </p>
+                          {% endfor %}
+                    </div>
+                </div>
                 {% endfor %}
-                </table>
-            <!-- </div> -->
         </div>
         <div class="container d-flex justify-content-center" style="margin-top: 2%">
-                <a href="http://localhost:5000/reset">
+                <a href="{{ url_for('reset')}}">
                     <button class="form-control btn btn-primary">
                         Click here to reset user data
                     </button>
                 </a>
             </div>
+        <div class="container d-flex justify-content-center" style="margin-top: 2%">
+                <a href="{{ url_for('index')}}">
+                    <button class="form-control btn btn-primary">
+                        Click here to enter another data
+                    </button>
+                </a>
+        </div>
     </div>    
 </body>
 </html>
