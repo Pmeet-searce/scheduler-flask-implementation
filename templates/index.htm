@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>
+            Scheduling task
+        </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+        
+        <div class="Input-part container d-flex justify-content-center" style="margin-top: 150px">
+            
+            <form name="userdata" action="http://127.0.0.1:5000/posting" style="width: 25%;" method="POST" onSubmit="return validate_data(userdata)">
+                <div class="form-group">
+
+                    <label for="user">Enter User name</label>
+                    <input type="text" id="user" name="user" class="form-control" placeholder="Enter username here" autofocus required>
+                </div>
+                <div class="form-group">
+
+                    <label for="profile">Enter Profile name</label>
+                    <input type="text" id="profile" name="profile" class="form-control" placeholder="Enter profile name here" required>
+                </div>
+                <div class="form-group">
+
+                    <label for="startdate">Enter Start Date(DD-MM-YYYY)</label>
+                    <input type="text" id="startdate" name="startdate" class="form-control" placeholder="Enter Start Date here" required>
+                </div>
+                <div class="form-group">
+
+                    <label for="enddate">Enter End Date(DD-MM-YYYY)</label>
+                    <input type="text" id="enddate" name="enddate" class="form-control" placeholder="Enter End Date here" required>
+                </div>                
+                <div class="form-group">
+
+                    <input class="form-control btn-success" type="submit">
+                </div>
+            </form>
+        </div>
+        <div class="container d-flex justify-content-center">
+            <a href="http://localhost:5000/display">
+                <button class="form-control btn btn-primary">
+                    Click here to check user data
+                </button>
+            </a>
+        </div>
+    <script>
+
+        function validate_data(form){
+
+            var startDateRegEx=/[0-9]{2}[-][0-9]{2}[-][0-9]{4}/
+            var endDateRegEx=/[0-9]{2}[-][0-9]{2}[-][0-9]{4}/
+            var startDate=form.startdate.value
+            var endDate=form.enddate.value
+            if(startDateRegEx.test(startDate) && endDateRegEx.test(endDate)){
+                return true
+            }
+            else{
+                alert(" Dates invalid please keep both dates in format(DD-MM-YYYY)")
+                return false
+            }
+        }
+
+    </script>
+
+    </body>
+</html>
