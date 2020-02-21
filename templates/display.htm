@@ -3,6 +3,8 @@
 <head>
     <title>Results</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.js')}}" ></script>
 </head>
 <body>
     <div class="container">
@@ -11,24 +13,92 @@
                     JSON DATA
                 </h1>
             </div>
-        <div class="container d-flex justify-content-center" style="margin-top: 2%">
-                {% for key in data.keys() %}
-                <div class="card text-black mb-3" style="max-width: 20rem;">
-                    <div class="card-header">Username : {{key}}</div>
-                    <div class="card-body">
+        <!-- <div class="container d-flex justify-content-center" style="margin-top: 2%">
+            <div class="card text-black mb-3" style="max-width: 20rem;">
+                <div class="card-header">Username : {{key}}</div>
+                <div class="card-body">
                         {% for i in data[key] %}
-                          <h5 class="card-title">Profile : {{i['profile']}}</h5>
-                          <p class="card-text">
+                        <h5 class="card-title">Profile : {{i['profile']}}</h5>
+                        <p class="card-text">
                             Start date : {{i['startDate']}}
                             <br>          
                             End date : {{i['endDate']}}
                             <br>
-                          </p>
-                          {% endfor %}
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="row">
+                <div class="col-4">
+                    <div class="list-group" id="list-tab" role="tablist">
+                    {% for key in data.keys() %}
+                        {%if loop.first%}                        
+                        <a class="list-group-item list-group-item-action active" id="list-{{key}}-list" data-toggle="list" href="#list-{{key}}" role="tab" aria-controls="{{key}}">
+                        {%else%}
+                        <a class="list-group-item list-group-item-action" id="list-{{key}}-list" data-toggle="list" href="#list-{{key}}" role="tab" aria-controls="{{key}}">                        
+                        {%endif%}
+                            {{key}}
+                            <span class="badge badge-primary badge-pill align-content-right">{{data[key]|length}}</span>
+                        </a>
+                    {% endfor %}
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="tab-content" id="nav-tabContent">
+                        {% for key in data.keys() %}
+                            {%if loop.first %}
+                               <div class="tab-pane fade show active" id="list-{{key}}" role="tabpanel" aria-labelledby="list-{{key}}-list">
+                            {%else%}
+                                <div class="tab-pane fade" id="list-{{key}}" role="tabpanel" aria-labelledby="list-{{key}}-list">                                    
+                            {%endif%}
+                                {% for i in data[key] %}
+                                    Profile:  {{i['profile']}}
+                                    <br>
+                                    Start date:  {{i['startDate']}}
+                                    <br>
+                                    End date:  {{i['endDate']}}
+                                    <br>
+                                {% endfor %}
+                                </div>
+                                </div>
+                        {% endfor %}
+                </div>
+            </div> -->
+            <div class="accordion" id="accordionExample">
+                {% for key in data.keys() %}
+                <div class="card">
+                    <div class="card-header btn-link" id="heading{{key}}">
+                    <h2 class="mb-0">
+                        <button class="btn" style="width:100%" type="button" data-toggle="collapse" data-target="#collapse{{key}}" aria-expanded="true" aria-controls="collapse{{key}}">
+                           Username:  {{key}}
+                        </button>
+                    </h2>
+                </div>
+                {%if loop.first %}
+                
+                <div id="collapse{{key}}" class="collapse show" aria-labelledby="heading{{key}}" data-parent="#accordionExample">
+                    {%else%}
+                    <div id="collapse{{key}}" class="collapse" aria-labelledby="heading{{key}}" data-parent="#accordionExample">
+                        {%endif%}
+                        
+                        <div class="card-body">
+                            {% for i in data[key] %}
+                            <!-- <br> -->
+                            Profile:  {{i['profile']}}
+                            <br>
+                            Start date:  {{i['startDate']}}
+                            <br>
+                            End date:  {{i['endDate']}}
+                            <br>
+                            <br>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
-        </div>
+
+            </div>
         <div class="container d-flex justify-content-center" style="margin-top: 2%">
                 <a href="{{ url_for('reset')}}">
                     <button class="form-control btn btn-primary">
@@ -44,5 +114,23 @@
                 </a>
         </div>
     </div>    
+
+    <!-- <script>
+            var data= {{ data|tojson() }};
+            var first=true
+            for (var key in data)
+            {
+            if(first){
+                $('#myList a[href="#'+key+'"]').tab('show') 
+                first=false;
+            }
+            else{
+
+                $('#myList a[href="#'+key+'"]').tab('hide')             
+            }
+            }
+    </script> -->
+
+
 </body>
 </html>
